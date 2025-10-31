@@ -1,10 +1,10 @@
-"""Train a tsunami prediction model and save it to `api/app/model.joblib`.
+"""Train a tsunami prediction model and save it to `prediction-model/model.joblib`.
 
 This script:
 - Loads the CSV dataset in `database/dataset/Global Earthquake Tsunami Data.csv`
 - Trains a simple scikit-learn pipeline (imputer -> scaler -> classifier)
 - Evaluates and prints a basic accuracy on a holdout split
-- Saves the trained pipeline and a feature list to `api/app/model.joblib` and `api/app/model_features.json`
+- Saves the trained pipeline and a feature list to `prediction-model/model.joblib` and `prediction-model/model_features.json`
 
 Run from project root with the virtualenv active.
 """
