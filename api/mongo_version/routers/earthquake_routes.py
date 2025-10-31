@@ -11,28 +11,28 @@ def create_eq(data: dict):
 # READ ALL
 @router.get("/earthquakes")
 def read_eqs():
-    return crud.get_earthquakes()
+    earthquakes = crud.get_earthquakes()
+    if not earthquakes:
+        return {"message": "No records found"}
+    return earthquakes
 
-# READ ONE
+# READ ONE by _id
 @router.get("/earthquakes/{eq_id}")
-def read_eq(eq_id: int):
+def read_eq(eq_id: str):
     eq = crud.get_earthquake_by_id(eq_id)
     if not eq:
-        raise HTTPException(status_code=404, detail="Not found")
+        raise HTTPException(status_code=404, detail="Earthquake not found")
     return eq
 
-# UPDATE
+# UPDATE by _id
 @router.put("/earthquakes/{eq_id}")
-def update_eq(eq_id: int, data: dict):
+def update_eq(eq_id: str, data: dict):
     updated_eq = crud.update_earthquake(eq_id, data)
     if not updated_eq:
-        raise HTTPException(status_code=404, detail="Not found")
+        raise HTTPException(status_code=404, detail="Earthquake not found")
     return updated_eq
 
-# DELETE
+# DELETE by _id
 @router.delete("/earthquakes/{eq_id}")
-def delete_eq(eq_id: int):
-    result = crud.delete_earthquake(eq_id)
-    if not result:
-        raise HTTPException(status_code=404, detail="Not found")
-    return result
+def delete_eq(eq_id: str):
+    return crud.delete_earthquake(eq_id)
