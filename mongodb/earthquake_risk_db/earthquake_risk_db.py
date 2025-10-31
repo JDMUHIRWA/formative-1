@@ -11,14 +11,14 @@ mongo_uri = os.getenv("MONGO_URI")
 
 #  Connect to MongoDB
 client = MongoClient(mongo_uri)
-print("✅ Connected to MongoDB")
+print(" Connected to MongoDB")
 
 # Create database and collection
 db = client["global_earthquake_db"]
 collection = db["earthquake_data"]
 
 # 5 Load CSV dataset from its full path
-csv_path = r"C:\Users\PC\Documents\ML datasets\earthquake_data_tsunami.csv"
+csv_path = "../databse/dataset/Global Earthquake Tsunami Data.csv"
 df = pd.read_csv(csv_path)
 
 #  Insert all records into MongoDB
