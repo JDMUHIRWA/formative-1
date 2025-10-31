@@ -18,12 +18,9 @@ db = client["global_earthquake_db"]
 collection = db["global_earthquake_db"]
 
 # 5 Load CSV dataset from its full path
-<<<<<<< HEAD
-csv_path = "../database/dataset/Global Earthquake Tsunami Data.csv"
-=======
-csv_path = r"../database/dataset/Global Earthquake Tsunami Data.csv"
 
->>>>>>> origin/mongodb
+csv_path = "../database/dataset/Global Earthquake Tsunami Data.csv"
+
 df = pd.read_csv(csv_path)
 
 #  Insert all records into MongoDB
