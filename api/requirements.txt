@@ -6,3 +6,8 @@ databases
 psycopg2-binary          
 python-dotenv
 pydantic
+scikit-learn
+pandas
+numpy
+joblib
+requests
