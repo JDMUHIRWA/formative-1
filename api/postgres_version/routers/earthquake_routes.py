@@ -9,7 +9,7 @@ def get_db():
     try:
         yield db
     finally:
-        db.close()
+        db.close() 
 
 # CREATE
 @router.post("/earthquakes", response_model=schemas.Earthquake)
