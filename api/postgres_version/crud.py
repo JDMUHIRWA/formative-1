@@ -1,12 +1,16 @@
 # crud.py
+from database import schemas
 from sqlalchemy.orm import Session
-from . import models, schemas
+from database import models
 
 def get_earthquake(db: Session, earthquake_id: int):
     return db.query(models.Earthquake).filter(models.Earthquake.earthquake_id == earthquake_id).first()
 
 def get_earthquakes(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Earthquake).offset(skip).limit(limit).all()
+
+def get_latest_earthquake(db: Session):
+    return db.query(models.Earthquake).order_by(models.Earthquake.earthquake_id.desc()).first()
 
 def create_earthquake(db: Session, eq: schemas.EarthquakeCreate):
     db_eq = models.Earthquake(**eq.dict())
