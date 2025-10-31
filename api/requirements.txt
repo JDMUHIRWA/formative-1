@@ -6,8 +6,11 @@ databases
 psycopg2-binary          
 python-dotenv
 pydantic
+<<<<<<< HEAD
 scikit-learn
 pandas
 numpy
 joblib
 requests
+=======
+>>>>>>> 8cdf6f238a81241b152b2e80c459bd4fa0ccf0c2
