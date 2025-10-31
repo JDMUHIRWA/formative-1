@@ -55,4 +55,24 @@ if __name__ == "__main__":
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     
-    
+    pipeline = Pipeline([
+        ("imputer", SimpleImputer(strategy="median")),
+        ("scaler", StandardScaler()),
+        ("clf", RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)),
+    ])
+
+    print("Training model...")
+    pipeline.fit(X_train, y_train)
+
+    y_pred = pipeline.predict(X_test)
+    acc = accuracy_score(y_test, y_pred)
+    print(f"Test accuracy: {acc:.4f}")
+    print(classification_report(y_test, y_pred))
+
+    MODEL_OUT.parent.mkdir(parents=True, exist_ok=True)
+    joblib.dump(pipeline, MODEL_OUT)
+    print("Saved model to", MODEL_OUT)
+
+    with open(FEATURES_OUT, "w", encoding="utf-8") as f:
+        json.dump({"features": features}, f)
+    print("Saved feature list to", FEATURES_OUT)
