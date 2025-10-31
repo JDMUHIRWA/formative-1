@@ -1,22 +1,24 @@
 """Fetch latest earthquake via the new API endpoint, prepare features, load model, predict, and store prediction in earthquake audit log.
 
-Run with project root on PYTHONPATH so `api.app` can be imported, e.g.:
-    python prediction-model/predict_from_latest.py
-
-Requirements: requests, joblib, pandas. The script will use the DB session from `api.app.database` and `api.app.crud.create_audit_log` to store the result.
+Requirements: requests, joblib, pandas. The script will use the DB session from `api.postgres_version.database` and `api.postgres_version.crud.create_audit_log` to store the result.
 """
+import sys
 import json
 import requests
 from pathlib import Path
 from pprint import pprint
 
+# Add project root (so Python can find 'api')
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.append(str(ROOT))
+
 # import DB/session and crud from the app
-from api.app import database, crud
-from api.app.database import SessionLocal
+from api.postgres_version import crud
+from database.database import SessionLocal
 
 ROOT = Path(__file__).resolve().parents[1]
-MODEL_PATH = ROOT / "api" / "app" / "model.joblib"
-FEATURES_PATH = ROOT / "api" / "app" / "model_features.json"
+MODEL_PATH = ROOT / "prediction-model" / "model.joblib"
+FEATURES_PATH = ROOT / "prediction-model" / "model_features.json"
 API_BASE = "http://127.0.0.1:8000"
 
 import joblib
@@ -39,7 +41,7 @@ def prepare_features(record, features):
 
 def main():
     if not MODEL_PATH.exists():
-        raise SystemExit(f"Model not found at {MODEL_PATH}. Run scripts/train_model.py first.")
+        raise SystemExit(f"Model not found at {MODEL_PATH}. Run prediction-model/model.py first.")
 
     model = joblib.load(MODEL_PATH)
 

@@ -36,3 +36,17 @@ def delete_earthquake(db: Session, earthquake_id: int):
         db.delete(db_eq)
         db.commit()
     return db_eq
+
+def create_audit_log(db: Session, table_name: str, operation: str, record_id: int | None, old_values: dict | None, new_values: dict | None, changed_by: str | None = None):
+    db_log = models.EarthquakeAuditLog(
+        table_name=table_name,
+        operation=operation,
+        record_id=record_id,
+        old_values=old_values,
+        new_values=new_values,
+        changed_by=changed_by,
+    )
+    db.add(db_log)
+    db.commit()
+    db.refresh(db_log)
+    return db_log
