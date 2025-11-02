@@ -1,4 +1,5 @@
-"""Script to connect to MongoDB Atlas and verify the connection by listing databases and collections."""
+"""Script to connect to MongoDB Atlas and verify the
+ connection by listing databases and collections."""
 
 import os
 from pymongo import MongoClient
