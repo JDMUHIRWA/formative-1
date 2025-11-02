@@ -1,5 +1,21 @@
-from pymongo import MongoClient # type: ignore
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 
-client = MongoClient("mongodb://localhost:27017")
-db = client["earthquake_db"]
-earthquake_collection = db["earthquake"]
+uri = "mongodb+srv://earthquake_db_user:Mklbt2UaptabgxRF@cluster0.vxnblou.mongodb.net/?appName=Cluster0"
+
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+# Database name
+db = client["global_earthquake_db"]
+
+# Collection
+earthquake_collection = db["global_earthquake_db"]
+
+
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
