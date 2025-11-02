@@ -163,7 +163,7 @@ Important: the prediction script uses the running API to fetch the record but wr
 
 - `ImportError` / missing packages: ensure you installed `requirements.txt` inside the active virtual environment and that ML packages are installed.
 - `Database connection` errors: verify `.env` contains a valid `POSTGRES_SQL` and that Postgres is accessible.
-- `Model not found`: run `python scripts/train_model.py` to create `prediction-model/model.joblib`.
+- `Model not found`: run `python prediction-model/model.py` to create `prediction-model/model.joblib`.
 
 ---
 
