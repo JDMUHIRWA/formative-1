@@ -1,7 +1,13 @@
-from pymongo import MongoClient
+"""Script to connect to MongoDB Atlas and verify the connection by listing databases and collections."""
 
-# Your Atlas URI
-mongo_uri = "mongodb+srv://earthquake_db_user:Mklbt2UaptabgxRF@cluster0.vxnblou.mongodb.net/"
+import os
+from pymongo import MongoClient
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Atlas URI
+mongo_uri = os.getenv("MONGO_URI")
 
 # Connect to MongoDB Atlas
 client = MongoClient(mongo_uri)
